@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>校园信息中心</title>
+  <link href="libs/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-md bg-body-tertiary mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="#home">校园信息中心</a>
+      <div class="navbar-nav">
+        <a class="nav-link active" href="#home">首页</a>
+        <a class="nav-link" href="#rooms">自习室</a>
+        <a class="nav-link" href="#stats">使用统计</a>
+      </div>
+    </div>
+  </nav>
+  <main class="container">
+    <section id="home" class="mb-4">
+      <h1 class="h3">校园公共信息与数据展示中心</h1>
+      <p class="text-muted">课堂作业八复现案例 · 数据来源：课程统一数据集</p>
+      <div class="row g-3" id="summary-cards"></div>
+    </section>
+
+    <section id="rooms" class="mb-4">
+      <h2 class="h5">自习室查询</h2>
+          </select>
+        </div>
+        <div class="col-auto">
+        </div>
+      </div>
+      <ul id="room-list" class="list-group"></ul>
+    </section>
+
+    <section id="stats" class="mb-4">
+      <h2 class="h5">使用统计（各自习室空余座位）</h2>
+    </section>
+  </main>
+
+  <footer class="text-center text-muted py-4">
+    软件开发综合实践 · 课堂作业八教师案例 · 数据来源：课程统一数据集
+  </footer>
+
+  <script src="libs/bootstrap.bundle.min.js"></script>
+  <script src="libs/echarts.min.js"></script>
+</body>
+</html>
