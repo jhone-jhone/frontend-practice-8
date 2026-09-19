@@ -18,18 +18,35 @@
       </div>
     </div>
   </nav>
+
   <main class="container">
     <section id="home" class="mb-4">
       <h1 class="h3">校园公共信息与数据展示中心</h1>
-      <p class="text-muted">课堂作业八复现案例 · 数据来源：课程统一数据集</p>
+      <p class="text-muted">课堂作业八实践案例 · 数据来源：课程统一数据集</p>
       <div class="row g-3" id="summary-cards"></div>
     </section>
 
     <section id="rooms" class="mb-4">
       <h2 class="h5">自习室查询</h2>
+      <div class="row g-2 mb-3">
+        <div class="col-auto">
+          <label for="floor-filter" class="form-label">楼层</label>
+          <select id="floor-filter" class="form-select">
+            <option value="all">全部</option>
+            <option value="1">1层</option>
+            <option value="2">2层</option>
+            <option value="3">3层</option>
+            <option value="4">4层</option>
           </select>
         </div>
         <div class="col-auto">
+          <label for="status-filter" class="form-label">状态</label>
+          <select id="status-filter" class="form-select">
+            <option value="all">全部</option>
+            <option value="开放">开放</option>
+            <option value="闭馆">闭馆</option>
+            <option value="维修">维修</option>
+          </select>
         </div>
       </div>
       <ul id="room-list" class="list-group"></ul>
@@ -37,6 +54,8 @@
 
     <section id="stats" class="mb-4">
       <h2 class="h5">使用统计（各自习室空余座位）</h2>
+      <p id="status" class="alert alert-warning" style="display:none"></p>
+      <div id="usage-chart" style="height:360px"></div>
     </section>
   </main>
 
@@ -46,5 +65,6 @@
 
   <script src="libs/bootstrap.bundle.min.js"></script>
   <script src="libs/echarts.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
