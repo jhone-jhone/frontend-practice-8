@@ -1,0 +1,45 @@
+/* 自定义样式放在Bootstrap之后引入，保证可覆盖 */
+body {
+  font-family: "KaiTi", "楷体", "STKaiti", "KaiTi_GB2312", serif;
+}
+
+#usage-chart {
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+#room-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* 背景层: 固定全屏, 不随页面滚动 */
+.kira-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-image: url("images/qq20260307.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.75;
+}
+
+/* 内容层毛玻璃: 半透明白底 + 高斯模糊 */
+.kira-content {
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.kira-content .kira-main-content {
+  background-color: transparent;
+}
