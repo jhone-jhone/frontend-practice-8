@@ -8,8 +8,48 @@
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
-      <div class="kira-background"></div>
-      <h1>杀戮尖塔Ⅱ卡牌及人物介绍</h1>
-      <p>杀戮尖塔Ⅱ是一款经典肉鸽卡牌构筑。选择角色爬塔，沿路打怪、触发随机事件，挑选卡牌、收集遗物、获取药水，组建专属卡组；<br>回合制卡牌战斗，规划每回合能量分配，战败就要从头再来，每局地图、奖励完全随机，重玩度极高。包含单人模式，还支持最多 4 人联机合作爬塔</p>
+    <div class="kira-background"></div>
+    <nav class="navbar navbar-expand-md mb-4">
+        <div class="container">
+          <a class="navbar-brand" href="#home">杀戮尖塔Ⅱ卡牌及人物出场率和胜率</a>
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link active" href="#home">杀戮尖塔Ⅱ游戏简介</a>
+            <a class="nav-link" href="#characters">人物出场率以及胜率</a>
+            <a class="nav-link" href="#cards">卡牌出场率以及胜率</a>
+            <a class="nav-link" href="three-d/scene.html">选择你的角色</a>
+          </div>
+        </div>
+      </nav>
+
+  <main class="container">
+    <section id="home" class="mt-4">
+      <h1 class="h3">杀戮尖塔Ⅱ游戏简介</h1>
+      <p class="text-muted">杀戮尖塔Ⅱ是由Mega Crit Games开发的经典肉鸽卡牌构筑。<br>统计数据来源于百度统计。</p>
+      <div class="row g-3" id="game-info"></div>
+    </section>
+    
+    <section id="characters" class="mt-4">
+      <h1 class="h3">人物出场率以及胜率</h1>
+      <p class="text-muted">人物出场率以及胜率的统计信息。</p>
+      <div class="row g-3">
+        <div class="col-12 col-md-6">
+          <div id="pickrate-chart" class="chart"></div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div id="winrate-chart" class="chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cards" class="mt-4">
+      <h1 class="h3">卡牌出场率以及胜率</h1>
+      <p class="text-muted">卡牌出场率以及胜率的统计信息。</p>
+      <div class="row g-3" id="card-info"></div>
+    </section>
+    
+  </main>
+
+  <script src="libs/echarts.min.js"></script>
+  <script src="app.js"></script>
   </body>
 </html>
