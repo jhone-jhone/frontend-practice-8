@@ -24,6 +24,10 @@ async function loadAllData() {
     console.log('其他卡牌:', other);
     console.log('储君:', regent);
     console.log('静默猎手:', silent);
+    // 卡牌板块: 汇总各卡池 + 反查效果表
+    pools = { ironclad, silent, regent, necrobinder, defect, ancient, colorless, other };
+    effectMap = buildEffectMap(cardTexts);
+    renderCards();
   } catch (err) {
     console.error('数据加载失败:', err);
   }
@@ -85,5 +89,84 @@ const renderCharacterCharts = (characters) => {
     winChart.resize();
   });
 };
+
+// ── 卡牌板块: 角色选项 + 胜率排名 + 点击看效果 ──
+const POOL_LABELS = {
+  ironclad: '铁甲战士',
+  silent: '静默猎手',
+  regent: '储君',
+  necrobinder: '亡灵契约师',
+  defect: '故障机器人',
+  ancient: '先古之民',
+  colorless: '无色牌',
+  other: '其他卡牌'
+};
+
+let pools = {};
+let effectMap = {};
+
+// 从文案表反查: 中文卡名 → 效果描述
+const buildEffectMap = (cardTexts) => {
+  const map = {};
+  Object.keys(cardTexts).forEach(key => {
+    if (key.endsWith('.title')) {
+      const id = key.slice(0, -'.title'.length);
+      const desc = cardTexts[`${id}.description`];
+      if (desc) map[cardTexts[key]] = desc;
+    }
+  });
+  return map;
+};
+
+// 清理游戏本地化标记: {表达式}→X, [gold]等标签→去掉
+// 孤立的 X (后面没接汉字, 多为能量消耗) 统一补上"点能量"
+const cleanEffect = (text) => text
+  .replace(/\{[^}]*\}/g, 'X')
+  .replace(/\[\/?[a-zA-Z]+\]/g, '')
+  .replace(/X(?!\s*[\u4e00-\u9fa5])/g, 'X点能量')
+  .replace(/\n/g, '<br>');
+
+// 前三名高亮徽章
+const rankBadge = (i) => {
+  const cls = ['text-bg-danger', 'text-bg-warning', 'text-bg-primary'][i] || 'text-bg-secondary';
+  return `<span class="badge ${cls}">${i + 1}</span>`;
+};
+
+const renderCards = () => {
+  const poolKey = document.querySelector('#character-filter').value;
+  // 卡牌名字用所属角色的主题色上色
+  const charColor = CHARACTER_COLORS[POOL_LABELS[poolKey]] || '#212529';
+  const cards = (pools[poolKey] || []).slice().sort((a, b) => b.winRate - a.winRate);
+  const list = document.querySelector('#card-list');
+  list.innerHTML = '';
+  if (cards.length === 0) {
+    list.innerHTML = '<li class="list-group-item">没有该角色的卡牌数据</li>';
+    return;
+  }
+  cards.forEach((c, i) => {
+    const effect = effectMap[c.name];
+    // 每张卡的效果区有唯一 id, 卡名按钮通过 data-bs 属性控制它折叠
+    const effectId = `effect-${poolKey}-${i}`;
+    list.insertAdjacentHTML('beforeend', `
+      <li class="list-group-item">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <span>
+            ${rankBadge(i)}
+            <button type="button" class="btn btn-link btn-sm p-0 align-baseline card-name collapsed"
+                    style="color: ${charColor}"
+                    data-bs-toggle="collapse" data-bs-target="#${effectId}"
+                    aria-expanded="false" aria-controls="${effectId}">${c.name}</button>
+          </span>
+          <span class="small">胜率 <strong>${c.winRate}%</strong> · 出场率 ${c.pickRate}%</span>
+        </div>
+        <div class="collapse card-effect small text-muted mt-1" id="${effectId}">
+          <div>${effect ? cleanEffect(effect) : '暂无效果资料'}</div>
+        </div>
+      </li>
+    `);
+  });
+};
+
+document.querySelector('#character-filter').addEventListener('change', renderCards);
 
 loadAllData();

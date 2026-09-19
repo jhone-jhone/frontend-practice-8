@@ -12,11 +12,17 @@
     <nav class="navbar navbar-expand-md mb-4">
         <div class="container">
           <a class="navbar-brand" href="#home">杀戮尖塔Ⅱ卡牌及人物出场率和胜率</a>
-          <div class="navbar-nav ms-auto">
-            <a class="nav-link active" href="#home">杀戮尖塔Ⅱ游戏简介</a>
-            <a class="nav-link" href="#characters">人物出场率以及胜率</a>
-            <a class="nav-link" href="#cards">卡牌出场率以及胜率</a>
-            <a class="nav-link" href="three-d/scene.html">选择你的角色</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                  aria-controls="mainNav" aria-expanded="false" aria-label="切换导航">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainNav">
+            <div class="navbar-nav ms-auto">
+              <a class="nav-link active" href="#home">杀戮尖塔Ⅱ游戏简介</a>
+              <a class="nav-link" href="#characters">人物出场率以及胜率</a>
+              <a class="nav-link" href="#cards">卡牌出场率以及胜率</a>
+              <a class="nav-link" href="three-d/scene.html">选择你的角色</a>
+            </div>
           </div>
         </div>
       </nav>
@@ -43,12 +49,28 @@
 
     <section id="cards" class="mt-4">
       <h1 class="h3">卡牌出场率以及胜率</h1>
-      <p class="text-muted">卡牌出场率以及胜率的统计信息。</p>
-      <div class="row g-3" id="card-info"></div>
+      <p class="text-muted">按胜率排名，点击卡牌名称查看效果与功能。</p>
+      <div class="row g-2 mb-3">
+        <div class="col-auto">
+          <label for="character-filter" class="form-label">角色</label>
+          <select id="character-filter" class="form-select">
+            <option value="ironclad">铁甲战士</option>
+            <option value="silent">静默猎手</option>
+            <option value="regent">储君</option>
+            <option value="necrobinder">亡灵契约师</option>
+            <option value="defect">故障机器人</option>
+            <option value="ancient">先古之民</option>
+            <option value="colorless">无色牌</option>
+            <option value="other">其他卡牌</option>
+          </select>
+        </div>
+      </div>
+      <ul id="card-list" class="list-group"></ul>
     </section>
     
   </main>
 
+  <script src="libs/bootstrap.bundle.min.js"></script>
   <script src="libs/echarts.min.js"></script>
   <script src="app.js"></script>
   </body>

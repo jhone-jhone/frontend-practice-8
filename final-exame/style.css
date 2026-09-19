@@ -24,6 +24,24 @@ body {
   height: 360px;
 }
 
+/* 卡牌排名列表: 限制在固定高度的框内, 超出部分滚动查看 */
+#card-list {
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+/* 卡牌名称后的展开指示箭头: Bootstrap 会在收起状态的触发按钮上保留 .collapsed */
+.card-name::after {
+  content: "▸";
+  display: inline-block;
+  margin-left: 4px;
+  transition: transform 0.2s;
+}
+
+.card-name:not(.collapsed)::after {
+  transform: rotate(90deg);
+}
+
 /* 背景层: 固定全屏, 不随页面滚动 */
 .kira-background {
   position: fixed;
